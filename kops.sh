@@ -2,6 +2,8 @@
 #export PATH=$PATH:/usr/local/bin/
 #source .bashrc
 
+#here the bucket name should be unique its better practice that first you check the bucket name manually in AWS
+
 
 #! /bin/bash
 aws configure
@@ -13,6 +15,6 @@ mv kops-linux-amd64 /usr/local/bin/kops
 
 aws s3api create-bucket --bucket cloudanddevopsbyraham007.k8s.local --region us-east-1
 aws s3api put-bucket-versioning --bucket cloudanddevopsbyraham007.k8s.local --region us-east-1 --versioning-configuration Status=Enabled
-export KOPS_STATE_STORE=s3://cloudanddevopsbyraham007.k8s.local
+export KOPS_STATE_STORE=s3://cloudanddevopsbyraham007.k8s.local #run this command individually if you are facing issue in validating the cluster
 kops create cluster --name rahams.k8s.local --zones us-east-1a --master-count=1 --master-size t2.medium --node-count=2 --node-size t2.micro
 kops update cluster --name rahams.k8s.local --yes --admin
